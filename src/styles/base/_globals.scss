@@ -1,0 +1,13 @@
+@use "../utils";
+
+.container {
+  max-width: utils.$screen-xl;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: utils.$screen-sm) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

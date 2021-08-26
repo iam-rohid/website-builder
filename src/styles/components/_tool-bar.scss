@@ -1,0 +1,41 @@
+@use "../utils";
+
+.tool-bar {
+  height: utils.$toolbar-height;
+  background-color: #fff;
+  border-bottom: utils.$border;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+
+  .tool-bar-icon-btn {
+    width: utils.$toolbar-height;
+    color: rgba($color: #000000, $alpha: 0.5);
+    &:hover {
+      color: rgba($color: #000000, $alpha: 0.8);
+    }
+    &.active {
+      color: #412cff;
+    }
+  }
+
+  .tool-bar-icon {
+    font-size: 1.2rem;
+  }
+
+  .border-right {
+    border-right: 1px solid rgba($color: #000000, $alpha: 0.1);
+  }
+  .border-left {
+    border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
+  }
+
+  .device-size-btn-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .tool-bar-content-wrapper {
+    flex: 1;
+  }
+}

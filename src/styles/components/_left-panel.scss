@@ -1,0 +1,17 @@
+@use "../utils";
+.left-panel {
+  position: absolute;
+  width: utils.$left-pannel-width;
+  height: calc(100vh - #{utils.$toolbar-height});
+  background-color: #fff;
+  bottom: 0;
+  transition: left ease-in-out 300ms;
+  &.show {
+    left: 0;
+    // box-shadow: 3px 0px 6px rgba($color: #000000, $alpha: 0.05);
+    border-right: utils.$border;
+  }
+  &.hide {
+    left: -#{utils.$left-pannel-width};
+  }
+}

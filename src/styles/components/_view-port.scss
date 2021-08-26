@@ -1,0 +1,65 @@
+@use "../utils";
+
+.view-port {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f4f7;
+  flex: 1;
+  display: flex;
+  transition: padding ease-in-out 300ms;
+  position: relative;
+
+  &.has-left-panel {
+    padding-left: utils.$left-pannel-width;
+  }
+  &.has-right-panel {
+    padding-right: utils.$right-pannel-width;
+  }
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .frame {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      flex-direction: column;
+      border: utils.$border;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      &.desktop {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 0;
+      }
+      &.tablet {
+        width: 768px;
+        height: calc(100% - 2rem);
+      }
+      &.mobile {
+        height: calc(100% - 2rem);
+        width: 375px;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        flex: 1;
+        box-shadow: none;
+        border: none;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+.scale-chagner {
+  position: absolute;
+  z-index: 20;
+  bottom: 20px;
+  right: 20px;
+}
