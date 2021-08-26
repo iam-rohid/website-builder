@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { getHtml } from "../../lib/generateElements";
 import { deviceType } from "../../pages/Editor";
+import Element from "../../models/element";
 
 const ViewPort = (props: {
   showLeftPanel: boolean;
   showRightPanel: boolean;
   deviceSize: deviceType;
+  elements: Element[];
 }) => {
-  const { showLeftPanel, showRightPanel, deviceSize } = props;
-
-  const [style, setStyle] = useState(``);
-  const [html, setHtml] = useState(``);
-  const [script, Script] = useState(``);
+  const { showLeftPanel, showRightPanel, deviceSize, elements } = props;
 
   return (
     <div
@@ -31,29 +29,7 @@ const ViewPort = (props: {
             transform: `translate(-50%, -50%)`,
           }}
         >
-          <iframe
-            title="hello"
-            srcDoc={`
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <style>
-              ${style}
-            </style>
-          </head>
-          <body>
-            ${html}
-            <script>
-            ${script}
-            </script>
-          </body>
-          </html>
-          `}
-          ></iframe>
+          <iframe title="hello" srcDoc={getHtml(elements)}></iframe>
         </div>
       </div>
     </div>
