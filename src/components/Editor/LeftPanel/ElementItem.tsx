@@ -7,7 +7,7 @@ import ElementsGroup from "./ElementsGroup";
 const ElementItem = (props: { element: Element }) => {
   const { element } = props;
   const [expaned, setExpaned] = useState(false);
-  const { selectedElement, setSelectedElement, elements } = useEditor();
+  const { selectedElementID, setSelectedElementID, elements } = useEditor();
 
   const getChildrens = () => {
     return elements.filter((e: Element) => e.parentId === element.uid);
@@ -17,11 +17,11 @@ const ElementItem = (props: { element: Element }) => {
     <div className="element-item">
       <button
         className={`element-btn ${expaned ? "expanded" : "collapsed"} ${
-          selectedElement === props.element.uid && "selected"
+          selectedElementID === props.element.uid && "selected"
         }`}
         onClick={() => {
           setExpaned(getChildrens().length > 0 && !expaned);
-          setSelectedElement(props.element.uid);
+          setSelectedElementID(props.element.uid);
         }}
       >
         <div className="icon">

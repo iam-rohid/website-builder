@@ -6,6 +6,9 @@
   background-color: #fff;
   bottom: 0;
   transition: left ease-in-out 300ms;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   &.show {
     left: 0;
     border-right: utils.$border;
@@ -13,8 +16,14 @@
   &.hide {
     left: -#{utils.$left-pannel-width};
   }
+  .elements-wrapper {
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+  }
   .element-item {
     .element-btn {
+      min-width: 120px;
       width: 100%;
       padding: 0.4rem 0.5rem;
       display: flex;

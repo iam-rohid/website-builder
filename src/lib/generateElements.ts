@@ -9,27 +9,9 @@ export const getHtml = (elements: Element[]) => {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-      *,
-      ::after,
-      ::before {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      button {
-        background: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-      }
-      html {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-    </style>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body style="margin: 0; padding: 0">
+  <body>
     ${elements
       .map((element) => {
         if (element.parentId === null) {

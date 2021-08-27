@@ -11,28 +11,43 @@ const EditorProvider = (props: { children: JSX.Element }) => {
   const [showLeftPanel, setShowLeftPanel] = useState(true);
   const [showRightPanel, setShowRightPanel] = useState(true);
   const [deviceSize, setDeviceSize] = useState<deviceType>("desktop");
-  const [selectedElement, setSelectedElement] = useState<string | null>(null);
+  const [selectedElementID, setSelectedElementID] = useState<string | null>(
+    null
+  );
   const [elements, setElements] = useState<Element[]>([]);
 
   const addElement = (element: Element) => {
-    if (selectedElement) {
+    if (selectedElementID) {
       elements.map((elem) => {
-        if (elem.uid === selectedElement) {
+        if (elem.uid === selectedElementID) {
           if (elem.canHaveChildren) {
-            element.parentId = selectedElement;
-            setSelectedElement(element.uid);
+            element.parentId = selectedElementID;
+            setSelectedElementID(element.uid);
             setElements([...elements, element]);
           } else {
             element.parentId = elem.parentId;
-            setSelectedElement(element.uid);
+            setSelectedElementID(element.uid);
             setElements([...elements, element]);
           }
         }
       });
     } else {
       element.parentId = null;
-      setSelectedElement(element.uid);
+      setSelectedElementID(element.uid);
       setElements([...elements, element]);
+    }
+  };
+
+  const addClassToSelectedElement = (className: string) => {
+    if (selectedElementID) {
+      setElements(
+        elements.map((elem) => {
+          if (elem.uid === selectedElementID) {
+            elem.classes.push(className);
+          }
+          return elem;
+        })
+      );
     }
   };
 
@@ -45,9 +60,10 @@ const EditorProvider = (props: { children: JSX.Element }) => {
     setShowRightPanel,
     deviceSize,
     setDeviceSize,
-    selectedElement,
-    setSelectedElement,
+    selectedElementID,
+    setSelectedElementID,
     addElement,
+    addClassToSelectedElement,
   };
 
   return (

@@ -25,7 +25,9 @@ const LeftPanel = () => {
       >
         Add Group
       </button>
-      <ElementsGroup elements={getChildrens()} hidden={false} />
+      <div className="elements-wrapper">
+        <ElementsGroup elements={getChildrens()} hidden={false} />
+      </div>
     </div>
   );
 };
