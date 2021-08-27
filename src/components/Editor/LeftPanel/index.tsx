@@ -1,14 +1,31 @@
+import { useEditor } from "../../../contexts/EditorContext";
+import Text from "../../../models/text";
+import ElementsGroup from "./ElementsGroup";
 import Element from "../../../models/element";
-import ElementItem from "./ElementItem";
+import Group from "../../../models/group";
 
-const LeftPanel = (props: { showLeftPanel: boolean; elements: Element[] }) => {
+const LeftPanel = () => {
+  const { showLeftPanel, addElement, elements } = useEditor();
+  const getChildrens = () => {
+    return elements.filter((e: Element) => e.parentId === null);
+  };
   return (
-    <div className={`left-panel ${props.showLeftPanel ? "show" : "hide"}`}>
-      <div className="child-elements root-elements-group">
-        {props.elements.map((element) => (
-          <ElementItem element={element} />
-        ))}
-      </div>
+    <div className={`left-panel ${showLeftPanel ? "show" : "hide"}`}>
+      <button
+        onClick={() => {
+          addElement(new Text());
+        }}
+      >
+        Add Text
+      </button>
+      <button
+        onClick={() => {
+          addElement(new Group());
+        }}
+      >
+        Add Group
+      </button>
+      <ElementsGroup elements={getChildrens()} hidden={false} />
     </div>
   );
 };

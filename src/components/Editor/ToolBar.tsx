@@ -1,35 +1,27 @@
-import React from "react";
-
 import { BsLayoutSidebar, BsLayoutSidebarReverse } from "react-icons/bs";
 import {
   AiOutlineDesktop,
   AiOutlineMobile,
   AiOutlineTablet,
 } from "react-icons/ai";
-import { deviceType } from "../../pages/Editor";
-const ToolBar = (props: {
-  showLeftPanel: boolean;
-  setShowleftPanel: (value: boolean) => void;
-  showRightPanel: boolean;
-  setShowRightPanel: (value: boolean) => void;
-  deviceSize: deviceType;
-  setDeviceSize: (value: deviceType) => void;
-}) => {
+import { useEditor } from "../../contexts/EditorContext";
+
+const ToolBar = () => {
   const {
     showLeftPanel,
-    setShowleftPanel,
+    setShowLeftPanel,
     showRightPanel,
     setShowRightPanel,
     deviceSize,
     setDeviceSize,
-  } = props;
+  } = useEditor();
   return (
     <div className="tool-bar">
       <button
         className={`tool-bar-icon-btn border-right  ${
           showLeftPanel && "active"
         }`}
-        onClick={() => setShowleftPanel(!showLeftPanel)}
+        onClick={() => setShowLeftPanel(!showLeftPanel)}
       >
         <BsLayoutSidebar className={`tool-bar-icon`} />
       </button>

@@ -3,9 +3,11 @@ import paddingInterface from "../interfaces/padding";
 import { heightType, widthType } from "../types/cssTypes";
 
 export default class Element {
+  uid: string;
+  parentId: string | null;
   name: string;
   tag: string;
-  childrens: (Element | string)[] = [""];
+  canHaveChildren: boolean = true;
 
   display: "none" | "block" | "inline-block" | "flex" | "grid" = "block";
   margin: marginInterface = {
@@ -28,21 +30,32 @@ export default class Element {
   opacity: number = 100;
   id?: string;
   classes?: string[];
+  selected?: boolean;
 
   constructor(tag: string, name: string) {
+    this.uid = Math.random().toString().slice(2);
+    this.parentId = null;
     this.tag = tag;
     this.name = name;
   }
 
-  getChildren(): string {
-    return `${this.childrens
-      .map((child) => (typeof child === "string" ? child : child.getHtml()))
+  getChildren(elements: Element[]): string {
+    let childs: Element[] = elements.filter(
+      (elem) => elem.parentId === this.uid
+    );
+    return `${childs
+      .map((child) =>
+        typeof child === "string"
+          ? child
+          : child.getHtml(elements.filter((elem) => elem.parentId !== this.uid))
+      )
       .join("")}`;
   }
 
   getStyles(): [string, string][] {
     return [
       ["display", this.display],
+      ["outline", `${this.selected ? "1px solid blue" : "none"}`],
       [
         "background-color",
         `${
@@ -90,14 +103,14 @@ export default class Element {
   getTag(children: string): string {
     return `<${this.tag} style="${this.getStyles()
       .map((style) => `${style[0]}: ${style[1]};`)
-      .join(" ")}" ${this.id ? `id="${this.id}"` : null} ${
-      this.classes ? `class="${this.classes.join(" ")}"` : null
+      .join(" ")}" ${this.id ? `id="${this.id}"` : ""} ${
+      this.classes ? `class="${this.classes.join(" ")}"` : ""
     }>
     ${children}
   </${this.tag}>`;
   }
 
-  getHtml(): string {
-    return this.getTag(this.getChildren());
+  getHtml(elements: Element[]): string {
+    return this.getTag(this.getChildren(elements));
   }
 }

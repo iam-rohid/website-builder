@@ -1,14 +1,8 @@
 import { getHtml } from "../../lib/generateElements";
-import { deviceType } from "../../pages/Editor";
-import Element from "../../models/element";
+import { useEditor } from "../../contexts/EditorContext";
 
-const ViewPort = (props: {
-  showLeftPanel: boolean;
-  showRightPanel: boolean;
-  deviceSize: deviceType;
-  elements: Element[];
-}) => {
-  const { showLeftPanel, showRightPanel, deviceSize, elements } = props;
+const ViewPort = () => {
+  const { showLeftPanel, showRightPanel, deviceSize, elements } = useEditor();
 
   return (
     <div

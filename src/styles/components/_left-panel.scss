@@ -20,11 +20,12 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: start;
+      justify-content: flex-start;
       user-select: none;
       color: rgba($color: #000000, $alpha: 0.6);
       &:hover,
-      &.expanded {
+      &.expanded,
+      &.selected {
         color: rgba($color: #000000, $alpha: 0.9);
       }
       p {
@@ -54,5 +55,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    &.hidden {
+      display: none;
+    }
   }
 }
