@@ -3,7 +3,7 @@
   position: absolute;
   width: utils.$left-pannel-width;
   height: calc(100vh - #{utils.$toolbar-height});
-  background-color: #fff;
+  background-color: var(--panel-color);
   bottom: 0;
   transition: left ease-in-out 300ms;
   overflow: hidden;
@@ -11,7 +11,6 @@
   flex-direction: column;
   &.show {
     left: 0;
-    border-right: utils.$border;
   }
   &.hide {
     left: -#{utils.$left-pannel-width};

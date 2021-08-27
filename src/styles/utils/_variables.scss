@@ -1,16 +1,33 @@
+:root {
+  --primary-color: rgb(56, 92, 255);
+  --tool-bar-color: #fff;
+  --panel-color: rgb(245, 245, 245);
+  --view-port-color: rgb(230, 230, 230);
+  --hover-bg-primary: rgb(245, 245, 245);
+
+  --text-100: rgba(0, 0, 0, 0.9);
+  --text-200: rgba(0, 0, 0, 0.8);
+  --text-300: rgba(0, 0, 0, 0.6);
+  --text-400: rgba(0, 0, 0, 0.4);
+}
+
+html.dark {
+  --tool-bar-color: #272727;
+  --panel-color: #1c1c1c;
+  --view-port-color: #0d0d0d;
+  --text-100: rgba(255, 255, 255, 0.9);
+  --text-200: rgba(255, 255, 255, 0.8);
+  --text-300: rgba(255, 255, 255, 0.6);
+  --text-400: rgba(255, 255, 255, 0.4);
+  --hover-bg-primary: #1c1c1c;
+}
 $screen-sm: 640px;
 $screen-md: 768px;
 $screen-lg: 1024px;
 $screen-xl: 1200px;
 
 $toolbar-height: 3rem;
-$left-pannel-width: 16rem;
-$right-pannel-width: 16rem;
+$left-pannel-width: 320px;
+$right-pannel-width: 320px;
 
-$border: 1px solid
-  rgba(
-    $color: #000000,
-    $alpha: 0.1,
-  );
-
-$primary-color: rgb(56, 92, 255);
+$border: 1px solid var(--border-color-primary);

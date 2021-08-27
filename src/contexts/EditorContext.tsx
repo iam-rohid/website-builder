@@ -9,12 +9,46 @@ export const useEditor = () => {
 
 const EditorProvider = (props: { children: JSX.Element }) => {
   const [showLeftPanel, setShowLeftPanel] = useState(true);
-  const [showRightPanel, setShowRightPanel] = useState(true);
-  const [deviceSize, setDeviceSize] = useState<deviceType>("desktop");
+  const [showRightPanel, setShowRightPanel] = useState(false);
+  const [deviceSize, setDS] = useState<deviceType>("desktop");
   const [selectedElementID, setSelectedElementID] = useState<string | null>(
     null
   );
   const [elements, setElements] = useState<Element[]>([]);
+  const [darkMode, setDM] = useState(false);
+
+  const setDeviceSize = (value: deviceType) => {
+    setDS(value);
+    localStorage.deviceSize = value;
+  };
+
+  const setDarkMode = (value: boolean) => {
+    if (value) {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+      setDM(true);
+    } else {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
+      setDM(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+    if ("deviceSize" in localStorage) {
+      setDeviceSize(localStorage.deviceSize);
+    }
+    return () => {};
+  }, []);
 
   const addElement = (element: Element) => {
     if (selectedElementID) {
@@ -64,6 +98,8 @@ const EditorProvider = (props: { children: JSX.Element }) => {
     setSelectedElementID,
     addElement,
     addClassToSelectedElement,
+    darkMode,
+    setDarkMode,
   };
 
   return (

@@ -3,12 +3,11 @@
   position: absolute;
   width: utils.$right-pannel-width;
   height: calc(100vh - #{utils.$toolbar-height});
-  background-color: #fff;
+  background-color: var(--panel-color);
   bottom: 0;
   transition: right ease-in-out 300ms;
   &.show {
     right: 0;
-    border-left: utils.$border;
   }
   &.hide {
     right: -#{utils.$right-pannel-width};

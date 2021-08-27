@@ -4,6 +4,7 @@ import {
   AiOutlineMobile,
   AiOutlineTablet,
 } from "react-icons/ai";
+import { IoMoonSharp, IoSunnySharp } from "react-icons/io5";
 import { useEditor } from "../../contexts/EditorContext";
 
 const ToolBar = () => {
@@ -14,7 +15,10 @@ const ToolBar = () => {
     setShowRightPanel,
     deviceSize,
     setDeviceSize,
+    darkMode,
+    setDarkMode,
   } = useEditor();
+
   return (
     <div className="tool-bar">
       <button
@@ -26,6 +30,7 @@ const ToolBar = () => {
         <BsLayoutSidebar className={`tool-bar-icon`} />
       </button>
       <div className="tool-bar-content-wrapper"></div>
+
       <div className="device-size-btn-wrapper border-left">
         <button
           onClick={() => setDeviceSize("desktop")}
@@ -52,6 +57,18 @@ const ToolBar = () => {
           <AiOutlineMobile className="tool-bar-icon" />
         </button>
       </div>
+
+      <button
+        className={`tool-bar-icon-btn border-left active`}
+        onClick={() => setDarkMode(!darkMode)}
+      >
+        {darkMode ? (
+          <IoMoonSharp className={`tool-bar-icon`} />
+        ) : (
+          <IoSunnySharp className={`tool-bar-icon`} />
+        )}
+      </button>
+
       <button
         className={`tool-bar-icon-btn border-left ${
           showRightPanel && "active"

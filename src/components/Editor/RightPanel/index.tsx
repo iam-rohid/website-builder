@@ -6,11 +6,7 @@ const RightPanel = () => {
     useEditor();
   const [classValue, setClassValue] = useState("");
   return (
-    <div
-      className={`right-panel bg-white dark:bg-gray-800 ${
-        showRightPanel ? "show" : "hide"
-      }`}
-    >
+    <div className={`right-panel ${showRightPanel ? "show" : "hide"}`}>
       {selectedElementID && (
         <div>
           <input
