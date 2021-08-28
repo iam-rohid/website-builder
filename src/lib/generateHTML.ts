@@ -26,6 +26,14 @@ const getHtmlClasses = (component: ComponentType): string => {
     classNames = [...classNames, ...component.elementClasses];
   }
   component.backgorundColor && classNames.push(component.backgorundColor);
+  component.width && classNames.push(component.width);
+  component.height && classNames.push(component.height);
+  component.padding && classNames.push(component.padding);
+  component.marging && classNames.push(component.marging);
+  component.minWidth && classNames.push(component.minWidth);
+  component.maxWidth && classNames.push(component.maxWidth);
+  component.minHeight && classNames.push(component.minHeight);
+  component.maxHeight && classNames.push(component.maxHeight);
 
   if (component.type === ComponentsEnum.FLEX_COMPONENT) {
     classNames.push("flex");

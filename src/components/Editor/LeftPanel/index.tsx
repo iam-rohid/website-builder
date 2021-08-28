@@ -2,7 +2,7 @@ import ElementsGroup from "./ElementsGroup";
 import { useDispatch, useSelector } from "react-redux";
 import {
   editorActionCreators,
-  elementActionCreators,
+  componentActionCreators,
   StateType,
 } from "../../../store";
 import { bindActionCreators } from "redux";
@@ -23,10 +23,10 @@ const LeftPanel = () => {
   const [resizing, setResizing] = useState(false);
 
   const dispatch = useDispatch();
-  const { AddElement, ChangeSelectdElement } = bindActionCreators(
-    elementActionCreators,
-    dispatch
-  );
+  const {
+    AddComponent: AddElement,
+    ChangeSelectdComponent: ChangeSelectdElement,
+  } = bindActionCreators(componentActionCreators, dispatch);
   const [leftPanelWidth] = useSelector((state: StateType) => [
     state.editor.leftPanelWidth,
   ]);

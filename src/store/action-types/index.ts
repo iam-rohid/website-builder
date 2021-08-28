@@ -1,2 +1,2 @@
 export * from "./editor-action-types";
-export * from "./element-action-types";
+export * from "./component-action-types";

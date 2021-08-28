@@ -7,4 +7,12 @@ export interface BaseComponent {
   elementClasses?: string[];
   expanded?: boolean;
   backgorundColor?: string;
+  width?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  height?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  padding?: string;
+  marging?: string;
 }

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { editorReducer } from "./editor-reducer";
-import { elementReducer } from "./element-reducer";
+import { elementReducer } from "./component-reducer";
 
 export const reducers = combineReducers({
   editor: editorReducer,

@@ -2,7 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import ElementsGroup from "./ElementsGroup";
 
 import { useDispatch, useSelector } from "react-redux";
-import { elementActionCreators, StateType } from "../../../store";
+import { componentActionCreators, StateType } from "../../../store";
 import { bindActionCreators } from "redux";
 import { ComponentType } from "../../../types";
 
@@ -17,8 +17,8 @@ const ElementItem = (props: { element: ComponentType; pl: number }) => {
       ]
   );
   const dispatch = useDispatch();
-  const { ChangeSelectdElement } = bindActionCreators(
-    elementActionCreators,
+  const { ChangeSelectdComponent: ChangeSelectdElement } = bindActionCreators(
+    componentActionCreators,
     dispatch
   );
 

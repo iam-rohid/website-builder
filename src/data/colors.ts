@@ -106,6 +106,7 @@ export const allColors: [string, string][] = [
   ["transparent", "#ffffff00"],
   ["white", "#ffffff"],
   ["black", "#000000"],
+  ...grayColors,
   ...redColors,
   ...yellowColors,
   ...greenColors,
@@ -113,4 +114,8 @@ export const allColors: [string, string][] = [
   ...indigoColors,
   ...purpleColors,
   ...pinkColors,
+];
+
+export const backgroundColors: [string, string][] = [
+  ...allColors.map((color) => [`bg-${color[0]}`, color[1]] as [string, string]),
 ];

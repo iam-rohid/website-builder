@@ -16,8 +16,8 @@ export const getFlexComponent = (): ComponentType => ({
   tag: "div",
   flexDirection: FlexDirectionEnum.FlexRow,
   flexWarp: FlexWarpEnum.FlexWarp,
-  justifyContent: JustifyContentEnum.JustifyCenter,
-  alignItems: AlignItemsEnum.ItemsCenter,
+  justifyContent: JustifyContentEnum.JustifyStart,
+  alignItems: AlignItemsEnum.ItemsStart,
 });
 
 export const getTextComponent = (): ComponentType => ({
