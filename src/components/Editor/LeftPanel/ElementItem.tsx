@@ -11,7 +11,7 @@ const ElementItem = (props: { element: ComponentType; pl: number }) => {
 
   const [elements, selectedElement] = useSelector(
     (state: StateType) =>
-      [state.elements.elements, state.elements.selectedElement] as [
+      [state.elements.components, state.elements.selectedElement] as [
         ComponentType[],
         ComponentType | false
       ]

@@ -14,7 +14,7 @@ import { Resizable, ResizeCallbackData } from "react-resizable";
 const LeftPanel = () => {
   const [elements, selectedElement] = useSelector(
     (state: StateType) =>
-      [state.elements.elements, state.elements.selectedElement] as [
+      [state.elements.components, state.elements.selectedElement] as [
         ComponentType[],
         ComponentType | false
       ]
@@ -70,41 +70,43 @@ const LeftPanel = () => {
         }}
       >
         {resizing && <div className="block-panel"></div>}
-        <div className="add-btns">
-          <button
-            className="btn"
-            onClick={() => {
-              AddElement({
-                element: getFlexComponent(),
-                parentId: selectedElement ? selectedElement.id : false,
-              });
-            }}
-          >
-            Add Div
-          </button>
-          <button
-            className="btn"
-            onClick={() => {
-              AddElement({
-                element: getTextComponent(),
-                parentId: selectedElement ? selectedElement.id : false,
-              });
-            }}
-          >
-            Add Text
-          </button>
-        </div>
+        <div className="content-wrapper">
+          <div className="add-btns">
+            <button
+              className="btn"
+              onClick={() => {
+                AddElement({
+                  element: getFlexComponent(),
+                  parentId: selectedElement ? selectedElement.id : false,
+                });
+              }}
+            >
+              Add Div
+            </button>
+            <button
+              className="btn"
+              onClick={() => {
+                AddElement({
+                  element: getTextComponent(),
+                  parentId: selectedElement ? selectedElement.id : false,
+                });
+              }}
+            >
+              Add Text
+            </button>
+          </div>
 
-        <div className="elements-wrapper">
-          <ElementsGroup elements={getChildrens()} pl={0} hidden={false} />
-          <div
-            className="blank-area"
-            onClick={() =>
-              ChangeSelectdElement({
-                element: false,
-              })
-            }
-          ></div>
+          <div className="elements-wrapper">
+            <ElementsGroup elements={getChildrens()} pl={0} hidden={false} />
+            <div
+              className="blank-area"
+              onClick={() =>
+                ChangeSelectdElement({
+                  element: false,
+                })
+              }
+            ></div>
+          </div>
         </div>
       </div>
     </Resizable>

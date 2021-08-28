@@ -6,7 +6,6 @@
   background-color: var(--view-port-color);
   flex: 1;
   display: flex;
-  transition: padding ease-in-out 300ms;
   position: relative;
 
   &.has-left-panel {

@@ -6,25 +6,39 @@ import {
   RemoveElementPayloadType,
   SelectedElementPayloadType,
 } from "../";
+import { getHtmlDocumnet } from "../../lib/generateHTML";
+import { ComponentsEnum } from "../../enums";
 
 type ElementStateType = {
-  elements: ComponentType[];
+  components: ComponentType[];
   selectedElement: ComponentType | false;
+  html: string;
+  css: string;
+  js: string;
 };
 
 const initState: ElementStateType = {
-  elements: [],
+  components: [],
   selectedElement: false,
+  html: "",
+  css: "",
+  js: "",
 };
 
 const addElement = (
   state: ElementStateType,
   payload: AddElementPayloadType
 ): ElementStateType => {
-  return {
+  const newComponent = {
+    ...payload.element,
+    parentId: payload.parentId,
+    expanded: true,
+  } as ComponentType;
+
+  let newState = {
     ...state,
-    elements: [
-      ...state.elements.map((element) => {
+    components: [
+      ...state.components.map((element) => {
         return {
           ...element,
           expanded:
@@ -33,14 +47,17 @@ const addElement = (
               : element.expanded,
         };
       }),
-      {
-        ...payload.element,
-        parentId: payload.parentId,
-        expanded: true,
-      },
+      newComponent,
     ],
-    selectedElement: payload.element,
+    selectedElement: newComponent,
   };
+
+  newState = {
+    ...newState,
+    html: getHtmlDocumnet(newState.components),
+  };
+
+  return newState;
 };
 
 const removeElement = (
@@ -49,8 +66,8 @@ const removeElement = (
 ): ElementStateType => {
   return {
     ...state,
-    elements: state.elements.filter(
-      (element) => element.id !== payload.element.id
+    components: state.components.filter(
+      (component) => component.id !== payload.element.id
     ),
   };
 };
@@ -61,13 +78,13 @@ const changeSelectedElement = (
 ): ElementStateType => {
   return {
     ...state,
-    elements: state.elements.map((element) => {
+    components: state.components.map((component) => {
       return {
-        ...element,
+        ...component,
         expanded:
-          payload.element && element.id === payload.element.id
-            ? element.expanded === undefined || !element.expanded
-            : element.expanded,
+          payload.element && component.id === payload.element.id
+            ? component.expanded === undefined || !component.expanded
+            : component.expanded,
       };
     }),
     selectedElement: payload.element
@@ -85,6 +102,15 @@ export const elementReducer = (
 ): ElementStateType => {
   switch (action.type) {
     case ElementActionTypes.ADD_ELEMENT:
+      if (
+        state.selectedElement &&
+        state.selectedElement.type === ComponentsEnum.TEXT_COMPONENT
+      ) {
+        return addElement(state, {
+          element: action.payload.element,
+          parentId: state.selectedElement.parentId,
+        });
+      }
       return addElement(state, action.payload);
     case ElementActionTypes.REMOVE_ELEMENT:
       return removeElement(state, action.payload);

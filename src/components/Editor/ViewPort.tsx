@@ -2,13 +2,17 @@ import { DeviceSizes, StateType } from "../../store";
 import { useSelector } from "react-redux";
 
 const ViewPort = () => {
-  const [showLeftPanel, showRightPanel, deviceSize, leftPanelWidth] =
-    useSelector((state: StateType) => [
-      state.editor.showLeftPanel,
-      state.editor.showRightPanel,
-      state.editor.deviceSize,
-      state.editor.leftPanelWidth,
-    ]);
+  const [showLeftPanel, showRightPanel, deviceSize, leftPanelWidth, html] =
+    useSelector(
+      (state: StateType) =>
+        [
+          state.editor.showLeftPanel,
+          state.editor.showRightPanel,
+          state.editor.deviceSize,
+          state.editor.leftPanelWidth,
+          state.elements.html,
+        ] as [boolean, boolean, DeviceSizes, number, string]
+    );
 
   return (
     <div
@@ -30,7 +34,7 @@ const ViewPort = () => {
             transform: `translate(-50%, -50%)`,
           }}
         >
-          <iframe title="hello" srcDoc={`<div></div>`}></iframe>
+          <iframe title="hello" srcDoc={html}></iframe>
         </div>
       </div>
     </div>
