@@ -5,19 +5,34 @@ import {
   AiOutlineTablet,
 } from "react-icons/ai";
 import { IoMoonSharp, IoSunnySharp } from "react-icons/io5";
-import { useEditor } from "../../contexts/EditorContext";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators, DeviceSizes, stateType } from "../../store";
+import { useEffect } from "react";
 
 const ToolBar = () => {
-  const {
-    showLeftPanel,
-    setShowLeftPanel,
-    showRightPanel,
-    setShowRightPanel,
-    deviceSize,
-    setDeviceSize,
-    darkMode,
-    setDarkMode,
-  } = useEditor();
+  const dispatch = useDispatch();
+
+  const { ChangeDeviceSize, ShowLeftPanel, ShowRightPanel, ChangeDarkMode } =
+    bindActionCreators(actionCreators, dispatch);
+
+  const [showLeftPanel, showRightPanel, deviceSize, darkMode] = useSelector(
+    (state: stateType) => [
+      state.editor.showLeftPanel,
+      state.editor.showRightPanel,
+      state.editor.deviceSize,
+      state.editor.darkMode,
+    ]
+  );
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    return () => {};
+  }, [darkMode]);
 
   return (
     <div className="tool-bar">
@@ -25,7 +40,7 @@ const ToolBar = () => {
         className={`tool-bar-icon-btn border-right  ${
           showLeftPanel && "active"
         }`}
-        onClick={() => setShowLeftPanel(!showLeftPanel)}
+        onClick={() => ShowLeftPanel(!showLeftPanel)}
       >
         <BsLayoutSidebar className={`tool-bar-icon`} />
       </button>
@@ -33,25 +48,25 @@ const ToolBar = () => {
 
       <div className="device-size-btn-wrapper border-left">
         <button
-          onClick={() => setDeviceSize("desktop")}
+          onClick={() => ChangeDeviceSize(DeviceSizes.DESKTOP)}
           className={`tool-bar-icon-btn desktop-btn ${
-            deviceSize === "desktop" && "active"
+            deviceSize === DeviceSizes.DESKTOP && "active"
           }`}
         >
           <AiOutlineDesktop className="tool-bar-icon" />
         </button>
         <button
-          onClick={() => setDeviceSize("tablet")}
+          onClick={() => ChangeDeviceSize(DeviceSizes.TABLET)}
           className={`tool-bar-icon-btn desktop-btn ${
-            deviceSize === "tablet" && "active"
+            deviceSize === DeviceSizes.TABLET && "active"
           }`}
         >
           <AiOutlineTablet className="tool-bar-icon" />
         </button>
         <button
-          onClick={() => setDeviceSize("mobile")}
+          onClick={() => ChangeDeviceSize(DeviceSizes.MOBILE)}
           className={`tool-bar-icon-btn desktop-btn ${
-            deviceSize === "mobile" && "active"
+            deviceSize === DeviceSizes.MOBILE && "active"
           }`}
         >
           <AiOutlineMobile className="tool-bar-icon" />
@@ -60,7 +75,7 @@ const ToolBar = () => {
 
       <button
         className={`tool-bar-icon-btn border-left active`}
-        onClick={() => setDarkMode(!darkMode)}
+        onClick={() => ChangeDarkMode(!darkMode)}
       >
         {darkMode ? (
           <IoMoonSharp className={`tool-bar-icon`} />
@@ -73,7 +88,7 @@ const ToolBar = () => {
         className={`tool-bar-icon-btn border-left ${
           showRightPanel && "active"
         }`}
-        onClick={() => setShowRightPanel(!showRightPanel)}
+        onClick={() => ShowRightPanel(!showRightPanel)}
       >
         <BsLayoutSidebarReverse className={`tool-bar-icon`} />
       </button>

@@ -1,30 +1,13 @@
-import { useState } from "react";
-import { useEditor } from "../../../contexts/EditorContext";
+import { useSelector } from "react-redux";
+import { stateType } from "../../../store";
 
 const RightPanel = () => {
-  const { showRightPanel, addClassToSelectedElement, selectedElementID } =
-    useEditor();
-  const [classValue, setClassValue] = useState("");
+  const showRightPanel = useSelector(
+    (state: stateType) => state.editor.showRightPanel
+  );
+
   return (
-    <div className={`right-panel ${showRightPanel ? "show" : "hide"}`}>
-      {selectedElementID && (
-        <div>
-          <input
-            type="text"
-            value={classValue}
-            onChange={(e) => setClassValue(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              addClassToSelectedElement(classValue);
-              setClassValue("");
-            }}
-          >
-            Add
-          </button>
-        </div>
-      )}
-    </div>
+    <div className={`right-panel ${showRightPanel ? "show" : "hide"}`}></div>
   );
 };
 

@@ -1,9 +1,14 @@
-import { getHtml } from "../../lib/generateElements";
-import { useEditor } from "../../contexts/EditorContext";
+import { DeviceSizes, stateType } from "../../store";
+import { useSelector } from "react-redux";
 
 const ViewPort = () => {
-  const { showLeftPanel, showRightPanel, deviceSize, elements } = useEditor();
-
+  const [showLeftPanel, showRightPanel, deviceSize] = useSelector(
+    (state: stateType) => [
+      state.editor.showLeftPanel,
+      state.editor.showRightPanel,
+      state.editor.deviceSize,
+    ]
+  );
   return (
     <div
       className={`view-port ${showLeftPanel && "has-left-panel"} ${
@@ -13,9 +18,9 @@ const ViewPort = () => {
       <div className="wrapper">
         <div
           className={`frame ${
-            deviceSize === "mobile"
+            deviceSize === DeviceSizes.MOBILE
               ? "mobile"
-              : deviceSize === "tablet"
+              : deviceSize === DeviceSizes.TABLET
               ? "tablet"
               : "desktop"
           }`}
@@ -23,7 +28,7 @@ const ViewPort = () => {
             transform: `translate(-50%, -50%)`,
           }}
         >
-          <iframe title="hello" srcDoc={getHtml(elements)}></iframe>
+          <iframe title="hello" srcDoc={`<div></div>`}></iframe>
         </div>
       </div>
     </div>

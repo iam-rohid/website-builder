@@ -1,6 +1,6 @@
 import Element from "../models/element";
 
-export const getHtml = (elements: Element[]) => {
+export const getHtml = (elements: Element[]): string => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -13,12 +13,13 @@ export const getHtml = (elements: Element[]) => {
   </head>
   <body>
     ${elements
-      .map((element) => {
+      .map((element: Element) => {
         if (element.parentId === null) {
           return element.getHtml(
             elements.filter((elem) => elem.parentId !== null)
           );
         }
+        return null;
       })
       .join("\n")}
   </body>

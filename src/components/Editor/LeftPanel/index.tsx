@@ -1,32 +1,19 @@
-import { useEditor } from "../../../contexts/EditorContext";
-import Text from "../../../models/text";
-import ElementsGroup from "./ElementsGroup";
-import Element from "../../../models/element";
-import Group from "../../../models/group";
+// import ElementsGroup from "./ElementsGroup";
+// import Element from "../../../models/element";
+import { useSelector } from "react-redux";
+import { stateType } from "../../../store";
 
 const LeftPanel = () => {
-  const { showLeftPanel, addElement, elements } = useEditor();
-  const getChildrens = () => {
-    return elements.filter((e: Element) => e.parentId === null);
-  };
+  // const getChildrens = () => {
+  //   return elements.filter((e: Element) => e.parentId === null);
+  // };
+  const showLeftPanel = useSelector(
+    (state: stateType) => state.editor.showLeftPanel
+  );
   return (
     <div className={`left-panel ${showLeftPanel ? "show" : "hide"}`}>
-      <button
-        onClick={() => {
-          addElement(new Text());
-        }}
-      >
-        Add Text
-      </button>
-      <button
-        onClick={() => {
-          addElement(new Group());
-        }}
-      >
-        Add Group
-      </button>
       <div className="elements-wrapper">
-        <ElementsGroup elements={getChildrens()} hidden={false} />
+        {/* <ElementsGroup elements={getChildrens()} hidden={false} /> */}
       </div>
     </div>
   );
