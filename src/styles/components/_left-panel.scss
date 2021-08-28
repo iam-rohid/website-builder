@@ -6,9 +6,11 @@
   background-color: var(--panel-color);
   bottom: 0;
   transition: left ease-in-out 300ms;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
+
   &.show {
     left: 0;
   }
@@ -16,50 +18,60 @@
     left: -#{utils.$left-pannel-width};
   }
   .elements-wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    overflow: auto;
     height: 100%;
-  }
-  .element-item {
-    .element-btn {
-      min-width: 120px;
+    .blank-area {
       width: 100%;
-      padding: 0.4rem 0.5rem;
+      height: 100%;
+    }
+  }
+  .element-btn {
+    width: 100%;
+    display: flex;
+    user-select: none;
+    color: var(--text-300);
+    .btn-content {
+      width: 100%;
+      min-width: 120px;
+      padding: 0.4rem 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      user-select: none;
-      color: rgba($color: #000000, $alpha: 0.6);
-      &:hover,
-      &.expanded,
-      &.selected {
-        color: rgba($color: #000000, $alpha: 0.9);
-      }
-      p {
-        font-size: 0.8rem;
-      }
+    }
+    &:hover,
+    &.selected {
+      color: var(--text-100);
+    }
+    &.selected {
+      background: var(--hover-bg-secondary);
+    }
+    p {
+      font-size: 0.8rem;
+    }
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1rem;
+    }
+    &.expanded {
       .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.5rem;
-        height: 1rem;
+        transform: rotateZ(0deg);
       }
-      &.expanded {
-        .icon {
-          transform: rotateZ(0deg);
-        }
-      }
-      &.collapsed {
-        .icon {
-          transform: rotateZ(-90deg);
-        }
+    }
+    &.collapsed {
+      .icon {
+        transform: rotateZ(-90deg);
       }
     }
   }
   .child-elements {
-    padding-left: 0.5rem;
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -7,14 +7,14 @@ import {
 import { IoMoonSharp, IoSunnySharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators, DeviceSizes, StateType } from "../../store";
+import { editorActionCreators, DeviceSizes, StateType } from "../../store";
 import { useEffect } from "react";
 
 const ToolBar = () => {
   const dispatch = useDispatch();
 
   const { ChangeDeviceSize, ShowLeftPanel, ShowRightPanel, ChangeDarkMode } =
-    bindActionCreators(actionCreators, dispatch);
+    bindActionCreators(editorActionCreators, dispatch);
 
   const [showLeftPanel, showRightPanel, deviceSize, darkMode] = useSelector(
     (state: StateType) => [

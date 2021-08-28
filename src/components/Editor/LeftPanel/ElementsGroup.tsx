@@ -1,11 +1,17 @@
-import Element from "../../../models/element";
 import ElementItem from "./ElementItem";
-const ElementsGroup = (props: { elements: Element[]; hidden: boolean }) => {
-  const { elements, hidden } = props;
+import HTMLElement from "../../../models/HTMLElement";
+
+const ElementsGroup = (props: {
+  elements: HTMLElement[];
+  hidden: boolean;
+  pl: number;
+}) => {
+  const { elements, hidden, pl } = props;
+  console.log(hidden);
   return (
     <div className={`child-elements ${hidden ? "hidden" : "visible"}`}>
-      {elements.map((element: Element) => {
-        return <ElementItem key={element.uid} element={element} />;
+      {elements.map((element) => {
+        return <ElementItem key={element.uuid} element={element} pl={pl + 8} />;
       })}
     </div>
   );

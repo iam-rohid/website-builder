@@ -15,6 +15,7 @@ export default class HTMLElement {
   tag: string; // HTML Tag
   classes?: string[]; // HTML Element Class
   canContainChild: boolean;
+  expanded?: boolean;
   constructor(
     name: string,
     tag: string,
@@ -34,7 +35,9 @@ export default class HTMLElement {
   }
 }
 
-export const div = new HTMLElement("Div", "div", true);
+export const div = () => {
+  return new HTMLElement("Div", "div", true);
+};
 export const section = new HTMLElement("Section", "div", true);
 export const container = new HTMLElement("Container", "div", true, [
   "container px-4 mx-auto max-w-7xl",

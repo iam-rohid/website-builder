@@ -24,12 +24,22 @@ const addElement = (
   return {
     ...state,
     elements: [
-      ...state.elements,
+      ...state.elements.map((element) => {
+        return {
+          ...element,
+          expanded:
+            state.selectedElement && element.uuid === state.selectedElement.uuid
+              ? true
+              : element.expanded,
+        };
+      }),
       {
         ...payload.element,
         parentUUID: payload.parentId,
+        expanded: true,
       },
     ],
+    selectedElement: payload.element,
   };
 };
 
@@ -51,7 +61,21 @@ const changeSelectedElement = (
 ): ElementStateType => {
   return {
     ...state,
-    selectedElement: payload.element,
+    elements: state.elements.map((element) => {
+      return {
+        ...element,
+        expanded:
+          payload.element && element.uuid === payload.element.uuid
+            ? element.expanded === undefined || !element.expanded
+            : element.expanded,
+      };
+    }),
+    selectedElement: payload.element
+      ? {
+          ...payload.element,
+          expanded: true,
+        }
+      : false,
   };
 };
 

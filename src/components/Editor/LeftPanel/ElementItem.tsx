@@ -1,34 +1,62 @@
-import { useState } from "react";
-import Element from "../../../models/element";
-import { MdArrowDropDown } from "react-icons/md";
+import { IoIosArrowDown } from "react-icons/io";
 import ElementsGroup from "./ElementsGroup";
 
-const ElementItem = (props: { element: Element }) => {
-  const { element } = props;
-  const [expaned, setExpaned] = useState(false);
-  // const { selectedElementID, setSelectedElementID, elements } = useEditor();
+import { useDispatch, useSelector } from "react-redux";
+import { elementActionCreators, StateType } from "../../../store";
+import { bindActionCreators } from "redux";
+import HTMLElement from "../../../models/HTMLElement";
 
-  // const getChildrens = () => {
-  //   return elements.filter((e: Element) => e.parentId === element.uid);
-  // };
+const ElementItem = (props: { element: HTMLElement; pl: number }) => {
+  const { element, pl } = props;
+
+  const [elements, selectedElement] = useSelector(
+    (state: StateType) =>
+      [state.elements.elements, state.elements.selectedElement] as [
+        HTMLElement[],
+        HTMLElement | false
+      ]
+  );
+  const dispatch = useDispatch();
+  const { ChangeSelectdElement } = bindActionCreators(
+    elementActionCreators,
+    dispatch
+  );
+
+  const getChildrens = () => {
+    return elements.filter((e: HTMLElement) => e.parentUUID === element.uuid);
+  };
 
   return (
-    <div className="element-item">
-      {/* <button
-        className={`element-btn ${expaned ? "expanded" : "collapsed"} ${
-          selectedElementID === props.element.uid && "selected"
+    <div>
+      <button
+        className={`element-btn ${
+          element.expanded === true ? "expanded" : "collapsed"
+        } ${
+          selectedElement && selectedElement.uuid === element.uuid && "selected"
         }`}
+        style={{
+          paddingLeft: `${pl}px`,
+        }}
         onClick={() => {
-          setExpaned(getChildrens().length > 0 && !expaned);
-          setSelectedElementID(props.element.uid);
+          ChangeSelectdElement({
+            element: element,
+          });
         }}
       >
-        <div className="icon">
-          {getChildrens().length > 0 && <MdArrowDropDown />}
+        <div className="btn-content">
+          <div className="icon" onClick={() => {}}>
+            {getChildrens().length > 0 && <IoIosArrowDown />}
+          </div>
+          <p>{element.name}</p>
         </div>
-        <p>{props.element.name}</p>
       </button>
-      {<ElementsGroup elements={getChildrens()} hidden={!expaned} />} */}
+      {
+        <ElementsGroup
+          elements={getChildrens()}
+          pl={pl}
+          hidden={element.expanded === undefined || !element.expanded}
+        />
+      }
     </div>
   );
 };
