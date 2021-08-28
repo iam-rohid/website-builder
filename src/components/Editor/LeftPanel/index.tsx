@@ -1,15 +1,16 @@
 import ElementsGroup from "./ElementsGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { elementActionCreators, StateType } from "../../../store";
-import HTMLElement, { div } from "../../../models/HTMLElement";
 import { bindActionCreators } from "redux";
+import { ComponentType } from "../../../types";
+import { getFlexComponent, getTextComponent } from "../../../models/components";
 
 const LeftPanel = () => {
   const [elements, selectedElement] = useSelector(
     (state: StateType) =>
       [state.elements.elements, state.elements.selectedElement] as [
-        HTMLElement[],
-        HTMLElement | false
+        ComponentType[],
+        ComponentType | false
       ]
   );
 
@@ -20,7 +21,7 @@ const LeftPanel = () => {
   );
 
   const getChildrens = () => {
-    return elements.filter((e: HTMLElement) => e.parentUUID === false);
+    return elements.filter((e: ComponentType) => e.parentId === false);
   };
 
   const showLeftPanel = useSelector(
@@ -28,16 +29,30 @@ const LeftPanel = () => {
   );
   return (
     <div className={`left-panel ${showLeftPanel ? "show" : "hide"}`}>
-      <button
-        onClick={() => {
-          AddElement({
-            element: div(),
-            parentId: selectedElement ? selectedElement.uuid : false,
-          });
-        }}
-      >
-        Add Div
-      </button>
+      <div className="add-btns">
+        <button
+          className="btn"
+          onClick={() => {
+            AddElement({
+              element: getFlexComponent(),
+              parentId: selectedElement ? selectedElement.id : false,
+            });
+          }}
+        >
+          Add Div
+        </button>
+        <button
+          className="btn"
+          onClick={() => {
+            AddElement({
+              element: getTextComponent(),
+              parentId: selectedElement ? selectedElement.id : false,
+            });
+          }}
+        >
+          Add Text
+        </button>
+      </div>
       <div className="elements-wrapper">
         <ElementsGroup elements={getChildrens()} pl={0} hidden={false} />
         <div

@@ -4,6 +4,7 @@
   --panel-color: rgb(245, 245, 245);
   --view-port-color: rgb(230, 230, 230);
   --hover-bg-primary: rgb(245, 245, 245);
+  --hover-bg-secondary: rgb(240, 240, 240);
 
   --text-100: rgba(0, 0, 0, 0.9);
   --text-200: rgba(0, 0, 0, 0.8);
@@ -28,7 +29,7 @@ $screen-lg: 1024px;
 $screen-xl: 1200px;
 
 $toolbar-height: 3rem;
-$left-pannel-width: 320px;
-$right-pannel-width: 320px;
+$left-pannel-width: 280px;
+$right-pannel-width: 280px;
 
 $border: 1px solid var(--border-color-primary);

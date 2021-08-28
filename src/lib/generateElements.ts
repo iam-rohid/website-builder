@@ -1,6 +1,6 @@
-import Element from "../models/element";
+import { ComponentType } from "../types";
 
-export const getHtml = (elements: Element[]): string => {
+export const getHtml = (elements: ComponentType[]): string => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -12,17 +12,19 @@ export const getHtml = (elements: Element[]): string => {
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   </head>
   <body>
-    ${elements
-      .map((element: Element) => {
-        if (element.parentId === null) {
-          return element.getHtml(
-            elements.filter((elem) => elem.parentId !== null)
-          );
-        }
-        return null;
-      })
-      .join("\n")}
+    
   </body>
   </html>
   `;
 };
+
+// ${elements
+//   .map((element: Element) => {
+//     if (element.parentId === null) {
+//       return element.getHtml(
+//         elements.filter((elem) => elem.parentId !== null)
+//       );
+//     }
+//     return null;
+//   })
+//   .join("\n")}

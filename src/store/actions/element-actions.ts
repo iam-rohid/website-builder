@@ -1,15 +1,15 @@
-import HTMLElement from "../../models/HTMLElement";
+import { ComponentType } from "../../types";
 import { ElementActionTypes } from "../";
 
 export type AddElementPayloadType = {
-  element: HTMLElement;
+  element: ComponentType;
   parentId: string | false;
 };
 export type RemoveElementPayloadType = {
-  element: HTMLElement;
+  element: ComponentType;
 };
 export type SelectedElementPayloadType = {
-  element: HTMLElement | false;
+  element: ComponentType | false;
 };
 
 type AddElementType = {
@@ -20,14 +20,14 @@ type AddElementType = {
 type RemoveElementType = {
   type: ElementActionTypes.REMOVE_ELEMENT;
   payload: {
-    element: HTMLElement;
+    element: ComponentType;
   };
 };
 
 type SelectElementType = {
   type: ElementActionTypes.CHANGE_SELECTED_ELEMENT;
   payload: {
-    element: HTMLElement | false;
+    element: ComponentType | false;
   };
 };
 

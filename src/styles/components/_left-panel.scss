@@ -17,6 +17,19 @@
   &.hide {
     left: -#{utils.$left-pannel-width};
   }
+  .add-btns {
+    display: flex;
+    flex-direction: row;
+    .btn {
+      flex: 1;
+      height: 48px;
+      color: var(--text-300);
+      &:hover {
+        color: var(--text-100);
+        background: var(--hover-bg-secondary);
+      }
+    }
+  }
   .elements-wrapper {
     display: flex;
     flex-direction: column;

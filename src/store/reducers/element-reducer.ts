@@ -1,4 +1,4 @@
-import HTMLElement from "../../models/HTMLElement";
+import { ComponentType } from "../../types";
 import {
   ElementActionTypes,
   AddElementPayloadType,
@@ -8,8 +8,8 @@ import {
 } from "../";
 
 type ElementStateType = {
-  elements: HTMLElement[];
-  selectedElement: HTMLElement | false;
+  elements: ComponentType[];
+  selectedElement: ComponentType | false;
 };
 
 const initState: ElementStateType = {
@@ -28,14 +28,14 @@ const addElement = (
         return {
           ...element,
           expanded:
-            state.selectedElement && element.uuid === state.selectedElement.uuid
+            state.selectedElement && element.id === state.selectedElement.id
               ? true
               : element.expanded,
         };
       }),
       {
         ...payload.element,
-        parentUUID: payload.parentId,
+        parentId: payload.parentId,
         expanded: true,
       },
     ],
@@ -50,7 +50,7 @@ const removeElement = (
   return {
     ...state,
     elements: state.elements.filter(
-      (element) => element.uuid !== payload.element.uuid
+      (element) => element.id !== payload.element.id
     ),
   };
 };
@@ -65,7 +65,7 @@ const changeSelectedElement = (
       return {
         ...element,
         expanded:
-          payload.element && element.uuid === payload.element.uuid
+          payload.element && element.id === payload.element.id
             ? element.expanded === undefined || !element.expanded
             : element.expanded,
       };

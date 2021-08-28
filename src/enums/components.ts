@@ -1,0 +1,6 @@
+export enum ComponentsEnum {
+  FLEX_COMPONENT,
+  GRID_COMPONENT,
+  TEXT_COMPONENT,
+  INPUT_COMPONENT,
+}

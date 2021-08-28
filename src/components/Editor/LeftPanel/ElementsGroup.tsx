@@ -1,8 +1,8 @@
 import ElementItem from "./ElementItem";
-import HTMLElement from "../../../models/HTMLElement";
+import { ComponentType } from "../../../types";
 
 const ElementsGroup = (props: {
-  elements: HTMLElement[];
+  elements: ComponentType[];
   hidden: boolean;
   pl: number;
 }) => {
@@ -11,7 +11,7 @@ const ElementsGroup = (props: {
   return (
     <div className={`child-elements ${hidden ? "hidden" : "visible"}`}>
       {elements.map((element) => {
-        return <ElementItem key={element.uuid} element={element} pl={pl + 8} />;
+        return <ElementItem key={element.id} element={element} pl={pl + 8} />;
       })}
     </div>
   );

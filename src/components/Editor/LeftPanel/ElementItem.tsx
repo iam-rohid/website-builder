@@ -4,16 +4,16 @@ import ElementsGroup from "./ElementsGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { elementActionCreators, StateType } from "../../../store";
 import { bindActionCreators } from "redux";
-import HTMLElement from "../../../models/HTMLElement";
+import { ComponentType } from "../../../types";
 
-const ElementItem = (props: { element: HTMLElement; pl: number }) => {
+const ElementItem = (props: { element: ComponentType; pl: number }) => {
   const { element, pl } = props;
 
   const [elements, selectedElement] = useSelector(
     (state: StateType) =>
       [state.elements.elements, state.elements.selectedElement] as [
-        HTMLElement[],
-        HTMLElement | false
+        ComponentType[],
+        ComponentType | false
       ]
   );
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const ElementItem = (props: { element: HTMLElement; pl: number }) => {
   );
 
   const getChildrens = () => {
-    return elements.filter((e: HTMLElement) => e.parentUUID === element.uuid);
+    return elements.filter((e: ComponentType) => e.parentId === element.id);
   };
 
   return (
@@ -32,7 +32,7 @@ const ElementItem = (props: { element: HTMLElement; pl: number }) => {
         className={`element-btn ${
           element.expanded === true ? "expanded" : "collapsed"
         } ${
-          selectedElement && selectedElement.uuid === element.uuid && "selected"
+          selectedElement && selectedElement.id === element.id && "selected"
         }`}
         style={{
           paddingLeft: `${pl}px`,
