@@ -9,6 +9,7 @@ export type EditorStateType = {
   showLeftPanel: boolean;
   showRightPanel: boolean;
   deviceSize: DeviceSizes;
+  leftPanelWidth: number;
 };
 
 export enum EditorActionTypes {
@@ -16,4 +17,5 @@ export enum EditorActionTypes {
   SHOW_RIGHT_PANEL = "SHOW_RIGHT_PANEL",
   CHANGE_DARK_MODE = "CHANGE_DARK_MODE",
   CHANGE_DEVICE_SIZE = "CHANGE_DEVICE_SIZE",
+  RESIZE_LEFT_PANEL = "RESIZE_LEFT_PANEL",
 }

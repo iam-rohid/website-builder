@@ -1,7 +1,6 @@
 @use "../utils";
 .left-panel {
   position: absolute;
-  width: utils.$left-pannel-width;
   height: calc(100vh - #{utils.$toolbar-height});
   background-color: var(--panel-color);
   bottom: 0;
@@ -11,11 +10,22 @@
   display: flex;
   flex-direction: column;
 
-  &.show {
-    left: 0;
+  .drag-bar {
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    right: 0;
+    top: 0;
+    &:hover {
+      cursor: e-resize;
+    }
   }
-  &.hide {
-    left: -#{utils.$left-pannel-width};
+
+  .block-panel {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
   .add-btns {
     display: flex;

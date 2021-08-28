@@ -2,18 +2,20 @@ import { DeviceSizes, StateType } from "../../store";
 import { useSelector } from "react-redux";
 
 const ViewPort = () => {
-  const [showLeftPanel, showRightPanel, deviceSize] = useSelector(
-    (state: StateType) => [
+  const [showLeftPanel, showRightPanel, deviceSize, leftPanelWidth] =
+    useSelector((state: StateType) => [
       state.editor.showLeftPanel,
       state.editor.showRightPanel,
       state.editor.deviceSize,
-    ]
-  );
+      state.editor.leftPanelWidth,
+    ]);
+
   return (
     <div
-      className={`view-port ${showLeftPanel && "has-left-panel"} ${
-        showRightPanel && "has-right-panel"
-      }`}
+      className={`view-port ${showRightPanel && "has-right-panel"}`}
+      style={{
+        paddingLeft: `${showLeftPanel ? leftPanelWidth : 0}px`,
+      }}
     >
       <div className="wrapper">
         <div

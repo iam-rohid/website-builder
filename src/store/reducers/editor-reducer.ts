@@ -24,6 +24,7 @@ const initState: EditorStateType = {
           EditorActionTypes.CHANGE_DEVICE_SIZE
         ) as DeviceSizes)
       : DeviceSizes.DESKTOP,
+  leftPanelWidth: 280,
 };
 
 export const editorReducer = (
@@ -70,6 +71,11 @@ export const editorReducer = (
       return {
         ...state,
         deviceSize: action.payload,
+      };
+    case EditorActionTypes.RESIZE_LEFT_PANEL:
+      return {
+        ...state,
+        leftPanelWidth: action.payload,
       };
     default:
       return state;

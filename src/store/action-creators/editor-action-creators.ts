@@ -33,3 +33,11 @@ export const ChangeDeviceSize = (deviceSize: DeviceSizes) => {
     });
   };
 };
+export const ResizeLeftPanel = (width: number) => {
+  return (dispatch: Dispatch<EditorAction>) => {
+    dispatch({
+      type: EditorActionTypes.RESIZE_LEFT_PANEL,
+      payload: width,
+    });
+  };
+};

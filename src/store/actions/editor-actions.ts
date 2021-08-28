@@ -16,9 +16,13 @@ type ChangeDeviceSizeAction = {
   type: EditorActionTypes.CHANGE_DEVICE_SIZE;
   payload: DeviceSizes;
 };
-
+type ResizeLeftPanel = {
+  type: EditorActionTypes.RESIZE_LEFT_PANEL;
+  payload: number;
+};
 export type EditorAction =
   | ShowLeftPanelAction
   | ShowRightPanelAction
   | ChangeDarkModeAction
-  | ChangeDeviceSizeAction;
+  | ChangeDeviceSizeAction
+  | ResizeLeftPanel;

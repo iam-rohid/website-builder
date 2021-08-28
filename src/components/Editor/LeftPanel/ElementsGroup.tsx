@@ -7,7 +7,6 @@ const ElementsGroup = (props: {
   pl: number;
 }) => {
   const { elements, hidden, pl } = props;
-  console.log(hidden);
   return (
     <div className={`child-elements ${hidden ? "hidden" : "visible"}`}>
       {elements.map((element) => {
