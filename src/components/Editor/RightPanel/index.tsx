@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { stateType } from "../../../store";
+import { StateType } from "../../../store";
 
 const RightPanel = () => {
   const showRightPanel = useSelector(
-    (state: stateType) => state.editor.showRightPanel
+    (state: StateType) => state.editor.showRightPanel
   );
 
   return (

@@ -1,9 +1,9 @@
-import { DeviceSizes, stateType } from "../../store";
+import { DeviceSizes, StateType } from "../../store";
 import { useSelector } from "react-redux";
 
 const ViewPort = () => {
   const [showLeftPanel, showRightPanel, deviceSize] = useSelector(
-    (state: stateType) => [
+    (state: StateType) => [
       state.editor.showLeftPanel,
       state.editor.showRightPanel,
       state.editor.deviceSize,

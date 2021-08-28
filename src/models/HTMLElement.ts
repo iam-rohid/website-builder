@@ -9,7 +9,7 @@ export enum ElementType {
 export default class HTMLElement {
   uuid: string;
   elementType: ElementType;
-  parentUUID?: string;
+  parentUUID: string | false;
   name: string;
   id?: string; // HTMl ID
   tag: string; // HTML Tag
@@ -30,6 +30,7 @@ export default class HTMLElement {
     this.classes = classes;
     this.id = id;
     this.elementType = elementType || ElementType.Container;
+    this.parentUUID = false;
   }
 }
 

@@ -1,14 +1,14 @@
 // import ElementsGroup from "./ElementsGroup";
 // import Element from "../../../models/element";
 import { useSelector } from "react-redux";
-import { stateType } from "../../../store";
+import { StateType } from "../../../store";
 
 const LeftPanel = () => {
   // const getChildrens = () => {
   //   return elements.filter((e: Element) => e.parentId === null);
   // };
   const showLeftPanel = useSelector(
-    (state: stateType) => state.editor.showLeftPanel
+    (state: StateType) => state.editor.showLeftPanel
   );
   return (
     <div className={`left-panel ${showLeftPanel ? "show" : "hide"}`}>

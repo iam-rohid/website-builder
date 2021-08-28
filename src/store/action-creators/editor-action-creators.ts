@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch } from "redux";
 import { DeviceSizes, EditorActionTypes, EditorAction } from "../";
 
 export const ChangeDarkMode = (darkMode: boolean) => {
